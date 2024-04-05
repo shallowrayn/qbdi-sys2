@@ -1,0 +1,13 @@
+[package]
+authors = ["rlysec", "shallowrayn"]
+description = "QBDI library rust binding (use rust bindgen)"
+edition = "2021"
+homepage = "https://github.com/shallowrayn/qbdi-sys2"
+license = "MIT"
+name = "qbdi-sys2"
+readme = "README.md"
+repository = "https://github.com/shallowrayn/qbdi-sys2"
+version = "0.1.3"
+
+[build-dependencies]
+bindgen = "0.69.4"
