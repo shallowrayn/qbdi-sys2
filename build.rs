@@ -1,16 +1,29 @@
+use std::env;
 use std::path::PathBuf;
 
-fn get_lib_name() -> &'static str {
-    // "QBDI_static"
-    "QBDI"
-}
+fn get_lib_name() -> String {
+    if let Ok(lib_name) = env::var("QBDI_LIB_NAME") {
+        return lib_name;
+    }
 
-fn get_additional_include_dirs() -> Vec<PathBuf> {
-    vec![]
+    // "QBDI_static"
+    "QBDI".to_owned()
 }
 
 fn get_lib_dir() -> Option<PathBuf> {
+    if let Ok(lib_dir) = env::var("QBDI_LIB_DIR") {
+        return Some(PathBuf::from(lib_dir));
+    }
+
     None
+}
+
+fn get_additional_include_dirs() -> Vec<PathBuf> {
+    if let Ok(include_dir) = env::var("QBDI_INCLUDE_DIR") {
+        return vec![PathBuf::from(include_dir)];
+    }
+
+    vec![]
 }
 
 fn main() {
@@ -42,7 +55,7 @@ fn main() {
         .generate()
         .expect("Unable to generate bindings");
 
-    let out_path = PathBuf::from(std::env::var("OUT_DIR").unwrap());
+    let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
     bindings
         .write_to_file(out_path.join("bindings.rs"))
         .expect("Couldn't write bindings!");

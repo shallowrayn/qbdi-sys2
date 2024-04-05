@@ -8,6 +8,11 @@ Rust FFI bindings for [QBDI](https://github.com/QBDI/QBDI) using [bindgen](https
 2. Add this crate to your project: `cargo add qbdi-sys2`
 3. Unsafe profit!
 
+The build script can be influenced using environment variables if it fails to find the QBDI installation:
+* `QBDI_INCLUDE_DIR`: The directory containing QBDI.h
+* `QBDI_LIB_NAME`: The name of the QBDI library e.g. "QBDI_static" for "libQBDI_static.so"
+* `QBDI_LIB_DIR`: The directory containing the QBDI library file (.so, .dll etc)
+
 ## Example
 
 ```
