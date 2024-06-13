@@ -4,9 +4,9 @@ use std::path::PathBuf;
 #[cfg(target_os = "windows")]
 fn get_windows_path() -> PathBuf {
     #[cfg(target_pointer_width = "64")]
-        let program_files = PathBuf::from(r"C:\Program Files");
+    let program_files = PathBuf::from(r"C:\Program Files");
     #[cfg(target_pointer_width = "32")]
-        let program_files = PathBuf::from(r"C:\Program Files (x86)");
+    let program_files = PathBuf::from(r"C:\Program Files (x86)");
     for entry in std::fs::read_dir(program_files).expect("Failed to read Program Files directory") {
         let entry = entry.expect("Failed to read entry");
         let path = entry.path();
@@ -70,11 +70,11 @@ fn get_additional_include_dirs() -> Vec<PathBuf> {
 }
 
 fn main() {
-    println!("cargo:rerun-if-changed=build.rs");
-    println!("cargo:rustc-link-lib={}", get_lib_name());
+    println!("cargo::rerun-if-changed=build.rs");
+    println!("cargo::rustc-link-lib={}", get_lib_name());
     if let Some(lib_dir) = get_lib_dir() {
         println!(
-            "cargo:rustc-link-search={}",
+            "cargo::rustc-link-search={}",
             lib_dir
                 .to_str()
                 .expect("Failed to convert library directory to string")
