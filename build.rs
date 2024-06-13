@@ -22,6 +22,7 @@ fn get_windows_path() -> PathBuf {
 }
 
 fn get_lib_name() -> String {
+    println!("cargo::rerun-if-env-changed=QBDI_LIB_NAME");
     if let Ok(lib_name) = env::var("QBDI_LIB_NAME") {
         return lib_name;
     }
@@ -36,6 +37,7 @@ fn get_lib_name() -> String {
 }
 
 fn get_lib_dir() -> Option<PathBuf> {
+    println!("cargo::rerun-if-env-changed=QBDI_LIB_DIR");
     if let Ok(lib_dir) = env::var("QBDI_LIB_DIR") {
         return Some(PathBuf::from(lib_dir));
     }
@@ -53,6 +55,7 @@ fn get_lib_dir() -> Option<PathBuf> {
 }
 
 fn get_additional_include_dirs() -> Vec<PathBuf> {
+    println!("cargo::rerun-if-env-changed=QBDI_INCLUDE_DIR");
     if let Ok(include_dir) = env::var("QBDI_INCLUDE_DIR") {
         return vec![PathBuf::from(include_dir)];
     }
